@@ -46,7 +46,7 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2021-11-01-preview' = {
   sku: sqlDatabaseSku
 }
 
-resource auditStorageAccount 'Microsoft.Storage/storageAccounts@2021-09-01' = {
+resource auditStorageAccount 'Microsoft.Storage/storageAccounts@2021-09-01' = if (auditingEnabled) {
   name: auditStorageAccountName
   location: location
   sku: {
@@ -55,7 +55,7 @@ resource auditStorageAccount 'Microsoft.Storage/storageAccounts@2021-09-01' = {
   kind: 'StorageV2'
 }
 
-resource sqlServerAudit 'Microsoft.Sql/servers/auditingSettings@2021-11-01-preview' = {
+resource sqlServerAudit 'Microsoft.Sql/servers/auditingSettings@2021-11-01-preview' = if (auditingEnabled) {
   parent: sqlServer
   name: 'default'
   properties: {
