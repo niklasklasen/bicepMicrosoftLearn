@@ -54,3 +54,13 @@ resource auditStorageAccount 'Microsoft.Storage/storageAccounts@2021-09-01' = {
   }
   kind: 'StorageV2'
 }
+
+resource sqlServerAudit 'Microsoft.Sql/servers/auditingSettings@2021-11-01-preview' = {
+  parent: sqlServer
+  name: 'default'
+  properties: {
+    state: 'Enabled'
+    storageEndpoint: environmentName == 'Production' ? auditStorageAccount.properties.primaryEndpoints.blob : ''
+    storageAccountAccessKey: environmentName == 'Production' ? listKeys(auditStorageAccount.id, auditStorageAccount.apiVersion).key[0].value : ''    
+  }
+}
