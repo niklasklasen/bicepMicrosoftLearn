@@ -2,6 +2,7 @@
 param locations array = [
   'eastus'
   'eastus2'
+  'eastasia'
 ]
 
 @secure()
