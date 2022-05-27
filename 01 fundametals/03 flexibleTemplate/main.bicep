@@ -1,6 +1,6 @@
 @description('The Azure regions in which the resources should be deployed')
 param locations array = [
-  'westeurope'
+  'eastus'
   'eastus2'
 ]
 
