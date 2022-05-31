@@ -9,3 +9,15 @@ param appServicePlanSkuName string = 'F1'
 
 var appServicePlanName = 'toy-product-launch-plan'
 
+module app 'modules/app.bicep' = {
+  name: 'toy-launch-app'
+  params: {
+    appServiceAppName: appServiceAppName
+    appServicePlanName: appServicePlanName
+    appServicePlanSkuName: appServicePlanSkuName
+    location: location
+  }
+}
+
+@description('The host name to use to access the website.')
+output websiteHostName string = app.outputs.appServiceAppHostName
