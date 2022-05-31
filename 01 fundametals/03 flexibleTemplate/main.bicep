@@ -20,7 +20,7 @@ param virtualNetworkAddressPrefix string = '10.10.0.0/16'
 param subnets array = [
   {
     name: 'frontend'
-    ipAddressRange : '10.10.5.9/24'
+    ipAddressRange : '10.10.5.0/24'
   }
   {
     name: 'backend'
