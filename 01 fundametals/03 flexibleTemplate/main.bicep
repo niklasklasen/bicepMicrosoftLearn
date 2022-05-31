@@ -30,7 +30,7 @@ param subnets array = [
 
 var subnetProperties = [for subnet in subnets: {
   name: subnet.name
-  proporties: {
+  properties: {
     addressPrefix: subnet.ipAddressRange
   }
 }]
