@@ -20,15 +20,15 @@ param virtualNetworkAddressPrefix string = '10.10.0.0/16'
 param subnets array = [
   {
     name: 'frontend'
-    ipAddressRamge : '10.10.5.9/24'
+    ipAddressRange : '10.10.5.9/24'
   }
   {
     name: 'backend'
-    ipAddressRamge: 10.10.10.0/24
+    ipAddressRange: '10.10.10.0/24'
   }
 ]
 
-var subnetProporties = [for subnet in subnets: {
+var subnetProperties = [for subnet in subnets: {
   name: subnet.name
   proporties: {
     addressPrefix: subnet.ipAddressRange
@@ -45,7 +45,7 @@ module databases 'modules/database.bicep' = [for location in locations: {
 }]
 
 resource virtualNetworks 'Microsoft.Network/virtualnetworks@2015-05-01-preview' = [for location in locations: {
-  name: 'teddubear-${location}'
+  name: 'tedybear-${location}'
   location: location
   properties: {
     addressSpace:{
@@ -53,5 +53,11 @@ resource virtualNetworks 'Microsoft.Network/virtualnetworks@2015-05-01-preview' 
         virtualNetworkAddressPrefix
       ]
     }
-    subnets: subnetProporties
+    subnets: subnetProperties
+  }
+}]
+
+output serverInfo array = [for i in range(0,length(locations)): {
+  name: databases[i].outputs.serverName
+  location: databases[i].outputs.serverFullyQualifiedDomainName
 }]
