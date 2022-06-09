@@ -34,7 +34,7 @@ resource sqlDb 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2021-06-15' =
     name: cosmosDBContainerName
     properties: {
       resource: {
-        id: cosmosDBAccountName
+        id: cosmosDBContainerName
         partitionKey: {
           kind: 'Hash'
           paths: [
