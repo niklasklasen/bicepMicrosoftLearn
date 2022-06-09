@@ -8,6 +8,7 @@ var cosmosDBContainerPartitionKey = '/droneId'
 
 resource cosmosDBAccount 'Microsoft.DocumentDB/databaseAccounts@2022-02-15-preview' = {
   name: cosmosDBAccountName
+  location: location
   properties: {
     databaseAccountOfferType: 'Standard'
     locations: [
