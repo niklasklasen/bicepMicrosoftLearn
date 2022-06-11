@@ -15,3 +15,20 @@ var appServicePlanName = 'toy-website-plan'
 var appServicePlanSkuName = (environmentType == 'prod') ? 'P2v3' : 'F1'
 var appServicePlanTierName = (environmentType == 'prod') ? 'PremiumV3' : 'Free'
 
+resource appServicePlan 'Microsoft.Web/serverfarms@2020-12-01' = {
+  name: appServicePlanName
+  location: location
+  sku: {
+    name: appServicePlanSkuName
+    tier: appServicePlanTierName
+  }
+}
+
+resource appServiceApp 'Microsoft.Web/sites@2018-11-01' = {
+  name: appServiceAppName
+  location: location
+  properties: {
+    serverFarmId: appServicePlan.id
+    httpsOnly: true
+  }
+}
